@@ -1,0 +1,8 @@
+/build
+/coverage
+/node_modules
+/test
+/debug
+/.jest
+
+*.config.js

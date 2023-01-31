@@ -1,0 +1,43 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Server",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": [
+				"run-script",
+				"server:dev"
+			]
+		},
+		{
+			"type": "node-terminal",
+			"name": "Debug Current JS File (node)",
+			"request": "launch",
+			"command": "node -- ${fileBasenameNoExtension}",
+			"cwd": "${fileDirname}"
+		},
+		{
+			"type": "node-terminal",
+			"name": "Debug Current TS File (ts-node)",
+			"request": "launch",
+			"command": "ts-node -- ${fileBasenameNoExtension}",
+			"cwd": "${fileDirname}"
+		},
+		{
+			"type": "node-terminal",
+			"name": "Debug Current Test File (npm run test)",
+			"request": "launch",
+			"command": "npm run test:debug -- ${fileBasenameNoExtension}",
+			"cwd": "${fileDirname}"
+		},
+		{
+			"name": "Docker Node.js Launch",
+			"type": "docker",
+			"request": "launch",
+			"preLaunchTask": "docker-run: debug",
+			"platform": "node"
+		}
+	]
+}

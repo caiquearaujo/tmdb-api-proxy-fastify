@@ -1,0 +1,50 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "commonjs",
+		"strict": true,
+		"declaration": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": false,
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"allowJs": false,
+		"resolveJsonModule": true,
+		"baseUrl": ".",
+		"rootDir": "./src",
+		"outDir": "./build",
+		"paths": {
+			"@/*": [
+				"src/*",
+			],
+		},
+		"plugins": [
+			{
+				"transform":"@zerollup/ts-transform-paths",
+				"exclude": ["*"]
+			}
+		],
+		"lib": [
+			"esnext",
+		],
+		"typeRoots": [
+			"<rootDir>/src/types",
+			"node_modules/@types"
+		],
+		"types": [
+			"node"
+		],
+	},
+	"include": [
+		"./src/**/*"
+	],
+	"exclude": [
+		"./node_modules/**/*",
+		"./build/**/*",
+		"./test/**/*"
+	]
+}

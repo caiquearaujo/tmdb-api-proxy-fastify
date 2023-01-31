@@ -1,0 +1,66 @@
+{
+	"name": "tmdb-api-proxy-fastify",
+	"private": true,
+	"version": "1.0.0",
+	"description": "Proxy for TMDB Api using Fastify.",
+	"scripts": {
+		"check": "tsc --noEmit",
+		"build": "cross-env NODE_ENV=production tsc -p tsconfig.build.json",
+		"start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' ./src/index.ts",
+		"launch": "cross-env NODE_ENV=production node ./build/index.js",
+		"format": "prettier --write \"src/**/*.ts\"",
+		"lint": "eslint --ext .ts --ignore-path .gitignore --fix src",
+		"test": "cross-env NODE_ENV=test jest",
+		"test:debug": "cross-env NODE_ENV=test node --inspect ./node_modules/.bin/jest --runInBand"
+	},
+	"author": "caiquearaujo",
+	"license": "MIT",
+	"homepage": "https://github.com/caiquearaujo/tmdb-api-proxy-fastify#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/caiquearaujo/tmdb-api-proxy-fastify.git"
+	},
+	"bugs": {
+		"url": "https://github.com/caiquearaujo/tmdb-api-proxy-fastify/issues"
+	},
+	"devDependencies": {
+		"@types/jest": "^29.2.5",
+		"@types/node": "^18.11.18",
+		"@typescript-eslint/eslint-plugin": "^5.48.0",
+		"@typescript-eslint/parser": "^5.48.0",
+		"@zerollup/ts-transform-paths": "^1.7.18",
+		"eslint": "^8.31.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-airbnb-typescript": "^17.0.0",
+		"eslint-config-prettier": "^8.6.0",
+		"eslint-import-resolver-typescript": "^3.5.2",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"husky": "^8.0.3",
+		"jest": "^29.3.1",
+		"nodemon": "^2.0.20",
+		"prettier": "^2.8.1",
+		"ts-jest": "^29.0.3",
+		"ts-node": "^10.9.1",
+		"tsc": "^2.0.4",
+		"tslib": "^2.4.1",
+		"typescript": "^4.9.4"
+	},
+	"dependencies": {
+		"@fastify/compress": "^6.2.0",
+		"@fastify/cors": "^8.2.0",
+		"@fastify/helmet": "^10.1.0",
+		"@fastify/http-proxy": "^8.4.0",
+		"@fastify/rate-limit": "^7.6.0",
+		"axios": "^1.2.2",
+		"concurrently": "^7.6.0",
+		"cross-env": "^7.0.3",
+		"dotenv": "^16.0.3",
+		"fastify": "^4.11.0",
+		"module-alias": "^2.2.2",
+		"pino-pretty": "^9.1.1"
+	},
+	"_moduleAliases": {
+		"@": "build/"
+	}
+}

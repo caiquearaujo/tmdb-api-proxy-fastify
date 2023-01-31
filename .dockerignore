@@ -1,0 +1,15 @@
+node_modules
+.git
+.husky
+.vscode
+coverage
+debug
+build
+.dockerignore
+.gitignore
+LICENSE
+*.md
+*.log
+*.code-workspace
+Dockerfile*
+docker-compose*

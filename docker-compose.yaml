@@ -1,0 +1,13 @@
+version: '3'
+services:
+  tmdb-proxy-api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    environment:
+      - NAME='tmdb-proxy-api'
+      - PORT='8080'
+      - HOST='0.0.0.0'

@@ -1,0 +1,61 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "node",
+			"dockerBuild": {
+				"dockerfile": "${workspaceFolder}/Dockerfile.dev",
+				"context": "${workspaceFolder}",
+				"pull": true
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: release",
+			"dependsOn": [
+				"docker-build"
+			],
+			"platform": "node"
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build"
+			],
+			"dockerRun": {
+				"containerName": "tmdb-api-proxy",
+				"ports": [
+					{
+						"hostPort": 8080,
+						"containerPort": 8080,
+						"protocol": "tcp"
+					}
+				],
+				"volumes": [
+					{
+						"localPath": "",
+						"containerPath": "/usr/src/app/node_modules",
+						"permissions": "rw"
+					},
+					{
+						"localPath": "${workspaceFolder}",
+						"containerPath": "/usr/src/app",
+						"permissions": "rw"
+					}
+				],
+				"env": {
+					"DEBUG": "*",
+					"NODE_ENV": "development",
+					"PORT": "8080",
+					"HOST": "0.0.0.0"
+				}
+			},
+			"node": {
+				"enableDebugging": true
+			}
+		}
+	]
+}
