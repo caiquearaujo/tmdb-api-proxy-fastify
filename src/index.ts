@@ -2,9 +2,10 @@ import 'module-alias/register';
 import ApiServer from './www/ApiServer';
 import FastifyApplierGroup from './www/FastifyApplierGroup';
 import plugins from './www/plugins';
+import auth from './www/routes/auth';
 
 const options = {
-	routes: new FastifyApplierGroup(),
+	routes: new FastifyApplierGroup(auth),
 	plugins: new FastifyApplierGroup(...plugins),
 };
 

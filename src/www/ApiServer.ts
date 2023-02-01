@@ -9,7 +9,14 @@ import {
 	TAvailableEnvs,
 	TEnvVariables,
 } from '@/types';
-import { NODE_ENV, HOST, NAME, PORT, API_KEY } from '@/env/config';
+import {
+	NODE_ENV,
+	HOST,
+	NAME,
+	PORT,
+	API_KEY,
+	COOKIE_SECRET,
+} from '@/env/config';
 import Logger from '@/utils/Logger';
 
 import HttpServer from './HttpServer';
@@ -32,6 +39,7 @@ export default class ApiServer implements IApiServer {
 			port: parseInt(PORT ?? '80', 10),
 			host: HOST ?? '0.0.0.0',
 			api_key: API_KEY ?? '',
+			cookie_secret: COOKIE_SECRET ?? 'cookie_secret',
 			environment: NODE_ENV as TAvailableEnvs,
 		};
 

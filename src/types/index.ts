@@ -7,6 +7,7 @@ export type TEnvVariables = {
 	port: number;
 	host: string;
 	api_key: string;
+	cookie_secret: string;
 	environment: TAvailableEnvs;
 };
 
