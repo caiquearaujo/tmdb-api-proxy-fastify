@@ -12,6 +12,10 @@ export default class FastifyApplierGroup implements IApplyToFastify {
 		this.callables = args;
 	}
 
+	public size(): number {
+		return this.callables.length;
+	}
+
 	async apply(app: IFastifyInstance, env: TEnvVariables): Promise<void> {
 		await Promise.all(
 			this.callables.map(async callable => {

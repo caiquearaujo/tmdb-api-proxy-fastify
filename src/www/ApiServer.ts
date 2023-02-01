@@ -1,22 +1,13 @@
 import fastify from 'fastify';
-import path from 'path';
 
 import {
 	IApiServer,
 	IFastifyInstance,
 	IHttpServer,
 	IApplyToFastify,
-	TAvailableEnvs,
 	TEnvVariables,
 } from '@/types';
-import {
-	NODE_ENV,
-	HOST,
-	NAME,
-	PORT,
-	API_KEY,
-	COOKIE_SECRET,
-} from '@/env/config';
+import mountedEnv from '@/env/config';
 import Logger from '@/utils/Logger';
 
 import HttpServer from './HttpServer';
@@ -34,18 +25,11 @@ export default class ApiServer implements IApiServer {
 		routes: IApplyToFastify;
 		plugins: IApplyToFastify;
 	}) {
-		this.env = {
-			name: NAME ?? 'api-server',
-			port: parseInt(PORT ?? '80', 10),
-			host: HOST ?? '0.0.0.0',
-			api_key: API_KEY ?? '',
-			cookie_secret: COOKIE_SECRET ?? 'cookie_secret',
-			environment: NODE_ENV as TAvailableEnvs,
-		};
+		this.env = mountedEnv;
 
 		this.app = fastify({
 			logger: {
-				file: path.resolve(__dirname, 'logs', 'server.log'),
+				file: this.env.log_path,
 			},
 			trustProxy: true,
 		});
