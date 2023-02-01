@@ -6,12 +6,21 @@ const callable: TFnApplyToFastify = async (app, env) => {
 		upstream: 'https://api.themoviedb.org/3',
 		prefix: '/api',
 		preHandler(request, reply, next) {
-			if (request.headers.cookie) {
-				const { session_id } = app.parseCookie(request.headers.cookie);
-				const unsignedSessionId = app.unsignCookie(session_id);
+			if (request.cookies.sessionid) {
+				const sessionid = app.unsignCookie(request.cookies.sessionid);
 
-				if (unsignedSessionId.value) {
-					request.params = { session_id: unsignedSessionId.value };
+				if (sessionid.value) {
+					const url = new URL(request.url, 'http://localhost');
+					url.searchParams.set('session_id', sessionid.value);
+
+					request.query = {
+						...(request.query || {}),
+						session_id: sessionid.value,
+					};
+
+					request.raw.url = url
+						.toString()
+						.replace('http://localhost', '');
 				}
 			}
 

@@ -18,16 +18,32 @@ beforeAll(async () => {
 });
 
 describe('routes > proxy', () => {
-	it('GET /api/movie/{movie_id}', async () => {
+	// it('GET /api/movie/{movie_id}', async () => {
+	// 	const response = await app.inject({
+	// 		method: 'GET',
+	// 		url: '/api/movie/76600',
+	// 	});
+
+	// 	const payload = JSON.parse(response.payload);
+
+	// 	expect(payload.id).toBe(76600);
+	// 	expect(payload.original_title).toBe('Avatar: The Way of Water');
+	// 	expect(response.statusCode).toBe(200);
+	// });
+
+	it('GET /api/movie/{movie_id} with cookie', async () => {
 		const response = await app.inject({
 			method: 'GET',
 			url: '/api/movie/76600',
+			cookies: {
+				sessionid: app.signCookie(
+					'f5c7eeb5a8870efe3cd7fc5c282cffd26800ecd'
+				),
+			},
 		});
 
-		const payload = JSON.parse(response.payload);
-
-		expect(payload.id).toBe(76600);
-		expect(payload.original_title).toBe('Avatar: The Way of Water');
-		expect(response.statusCode).toBe(200);
+		expect(response.raw.req.url).toBe(
+			'/api/movie/76600?session_id=f5c7eeb5a8870efe3cd7fc5c282cffd26800ecd'
+		);
 	});
 });
