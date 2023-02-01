@@ -52,5 +52,28 @@ export default class ApiServer implements IApiServer {
 
 		// Routes
 		await this.routes.apply(this.app, this.env);
+
+		// Not found routes
+		this.app.setNotFoundHandler((request, reply) => {
+			reply.status(404).send({
+				status: 404,
+				name: 'NotFound',
+				message: 'The resource you are looking for is not found.',
+			});
+		});
+
+		// Any error
+		this.app.setErrorHandler((error, request, reply) => {
+			const { name = 'UnknownError', message = 'Error is unknown' } =
+				error;
+
+			this.app.log.error(error);
+
+			reply.status(parseInt(error.code ?? '500', 10)).send({
+				status: error.code ?? 500,
+				name,
+				message,
+			});
+		});
 	}
 }
