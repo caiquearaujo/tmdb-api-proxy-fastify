@@ -7,15 +7,15 @@ const callable: TFnApplyToFastify = async (app, env) => {
 		prefix: '/api',
 		preHandler(request, reply, next) {
 			if (request.cookies.sessionid) {
-				const sessionid = app.unsignCookie(request.cookies.sessionid);
+				const { sessionid } = request.cookies;
 
-				if (sessionid.value) {
+				if (sessionid) {
 					const url = new URL(request.url, 'http://localhost');
-					url.searchParams.set('session_id', sessionid.value);
+					url.searchParams.set('session_id', sessionid);
 
 					request.query = {
 						...(request.query || {}),
-						session_id: sessionid.value,
+						session_id: sessionid,
 					};
 
 					request.raw.url = url
