@@ -4,4 +4,7 @@
 			"path": "."
 		}
 	],
+	"settings": {
+		"editor.fontSize": 16,
+	}
 }

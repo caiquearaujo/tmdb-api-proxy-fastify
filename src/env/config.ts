@@ -1,8 +1,15 @@
-import { TAvailableEnvs, TEnvVariables } from '@/types';
+import { config } from 'dotenv';
 import path from 'path';
+import { TAvailableEnvs, TEnvVariables } from '@/types';
 
-export const {
-	NODE_ENV = 'development',
+const { NODE_ENV = 'development' } = process.env;
+
+const DIR = path.resolve(__dirname, '../..');
+config({
+	path: `${DIR}/.env.${NODE_ENV}`,
+});
+
+const {
 	NAME = 'tmdb-api-proxy',
 	PORT = '8080',
 	HOST = '0.0.0.0',
