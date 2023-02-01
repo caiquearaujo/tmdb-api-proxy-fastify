@@ -1,7 +1,7 @@
 {
 	"name": "tmdb-api-proxy-fastify",
 	"private": true,
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"description": "Proxy for TMDB Api using Fastify.",
 	"scripts": {
 		"check": "tsc --noEmit",
