@@ -11,7 +11,7 @@ const callable: TFnApplyToFastify = async (app, env) => {
 			const { request_token } = data;
 			const redirectTo = request.headers['x-forwarded-host'];
 
-			reply
+			return reply
 				.cookie('request_token', request_token, {
 					path: '/',
 					secure: env.environment === 'production',
@@ -22,6 +22,13 @@ const callable: TFnApplyToFastify = async (app, env) => {
 					`https://www.themoviedb.org/authenticate/${request_token}?redirect_to=${redirectTo}`
 				);
 		}
+
+		return reply.code(403).send({
+			status_message:
+				'Invalid request_token. Call admin to check the logs.',
+			success: false,
+			status_code: 1,
+		});
 	});
 
 	app.get('/auth/approved', async (request, reply) => {
@@ -45,7 +52,7 @@ const callable: TFnApplyToFastify = async (app, env) => {
 			const { session_id } = data;
 			const redirectTo = request.headers['x-forwarded-host'];
 
-			reply
+			return reply
 				.clearCookie('request_token')
 				.cookie('sessionid', session_id, {
 					path: '/',
@@ -55,6 +62,13 @@ const callable: TFnApplyToFastify = async (app, env) => {
 				})
 				.redirect(`${redirectTo}`);
 		}
+
+		return reply.code(403).send({
+			status_message:
+				'Invalid request_token. Call admin to check the logs.',
+			success: false,
+			status_code: 1,
+		});
 	});
 };
 
