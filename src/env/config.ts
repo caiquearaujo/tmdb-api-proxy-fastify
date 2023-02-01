@@ -15,7 +15,7 @@ const {
 	HOST = '0.0.0.0',
 	API_KEY = '',
 	COOKIE_SECRET = 'cookie_secret',
-	LOGPATH = path.resolve(__dirname, '..', '..', 'logs', 'server.log'),
+	LOGPATH = path.resolve(__dirname, '..', '..', 'logs'),
 } = process.env;
 
 const mounted: TEnvVariables = {
