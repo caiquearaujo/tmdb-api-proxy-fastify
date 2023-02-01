@@ -29,7 +29,7 @@ export default class ApiServer implements IApiServer {
 
 		this.app = fastify({
 			logger: {
-				file: this.env.log_path,
+				file: `${this.env.log_path}/server.log`,
 			},
 			trustProxy: true,
 		});

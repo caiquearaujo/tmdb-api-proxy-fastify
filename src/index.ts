@@ -1,4 +1,20 @@
-import 'module-alias/register';
+/* eslint-disable import/first */
+import moduleAlias from 'module-alias';
+import path from 'path';
+
+const src = path.resolve(__dirname, '..', 'src');
+const build = path.resolve(__dirname, '..', 'build');
+
+if (process.env.NODE_ENV === 'production') {
+	moduleAlias.addAliases({
+		'@': build,
+	});
+} else {
+	moduleAlias.addAliases({
+		'@': src,
+	});
+}
+
 import ApiServer from './www/ApiServer';
 import FastifyApplierGroup from './www/FastifyApplierGroup';
 import plugins from './www/plugins';

@@ -1,6 +1,8 @@
 FROM node:16-alpine
 
 RUN mkdir -p /usr/app/node_modules
+RUN mkdir -p /usr/app/logs
+RUN touch /usr/app/logs/server.log
 WORKDIR /usr/app
 COPY ./package*.json ./
 RUN npm install

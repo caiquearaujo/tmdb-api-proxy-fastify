@@ -26,6 +26,7 @@
 	},
 	"devDependencies": {
 		"@types/jest": "^29.2.5",
+		"@types/module-alias": "^2.0.1",
 		"@types/node": "^18.11.18",
 		"@typescript-eslint/eslint-plugin": "^5.48.0",
 		"@typescript-eslint/parser": "^5.48.0",
@@ -61,8 +62,5 @@
 		"fastify": "^4.11.0",
 		"module-alias": "^2.2.2",
 		"pino-pretty": "^9.1.1"
-	},
-	"_moduleAliases": {
-		"@": "build/"
 	}
 }
